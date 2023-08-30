@@ -1,0 +1,1 @@
+add_executable(c_sorts main.cpp sorts.cpp test.cpp utils.cpp)
