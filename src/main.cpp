@@ -39,7 +39,7 @@ bool is_sorted(uint *array, uint len) {
 
 
 uint rnd_uint32() {
-    static uint MAX_RAN_VALUE = 0xF;
+    static uint MAX_RAN_VALUE = 0xFFFFFF;
     static auto engine = std::mt19937(
             (uint) std::chrono::high_resolution_clock::now().time_since_epoch().count());
     static auto dist = std::uniform_int_distribution<unsigned int>((uint) 0, MAX_RAN_VALUE);
