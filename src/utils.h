@@ -3,12 +3,11 @@
 
 #include <string>
 
-typedef unsigned int uint;
 
-uint max_value(const uint *array, uint len);
+uint32_t max_value(const uint32_t *array, uint32_t len);
 
-uint num_digits(uint num);
+uint32_t num_digits(uint32_t num);
 
-std::string &left_pad(std::string &s, char c, uint to_len);
+std::string &left_pad(std::string &s, char c, uint32_t to_len);
 
 #endif //C_SORTS_UTILS_H

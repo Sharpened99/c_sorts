@@ -15,11 +15,11 @@ using std::make_pair;
 namespace unittest {
 
     bool test_num_digits() {
-        std::array<pair<uint, uint>, 4> test_cases = {
-                make_pair<uint, uint>(1, 1),
-                make_pair<uint, uint>(23, 2),
-                make_pair<uint, uint>(532, 3),
-                make_pair<uint, uint>(312860, 6)
+        std::array<pair<uint32_t, uint32_t>, 4> test_cases = {
+                make_pair<uint32_t, uint32_t>(1, 1),
+                make_pair<uint32_t, uint32_t>(23, 2),
+                make_pair<uint32_t, uint32_t>(532, 3),
+                make_pair<uint32_t, uint32_t>(312860, 6)
         };
 
         return std::all_of(test_cases.begin(), test_cases.end(), [](auto test_case) {
@@ -28,16 +28,16 @@ namespace unittest {
     }
 
     bool test_max_value() {
-        uint values[9] = {123, 12, 2435, 3485, 2397479, 2384, 65342, UINT32_MAX, 3848};
+        uint32_t values[9] = {123, 12, 2435, 3485, 2397479, 2384, 65342, UINT32_MAX, 3848};
 
         return max_value(values, 9) == UINT32_MAX;
     }
 
     bool test_left_pad() {
         std::array<std::string, 4> test_cases = {
-                std::to_string((uint) 13),
+                std::to_string((uint32_t) 13),
                 "hey",
-                std::to_string((uint) 0),
+                std::to_string((uint32_t) 0),
                 ""
         };
         return std::all_of(test_cases.begin(), test_cases.end(), [](auto test_case) {

@@ -5,16 +5,16 @@
 using std::string;
 using std::to_string;
 
-uint max_value(const uint *array, const uint len) {
-    uint max = 0;
+uint32_t max_value(const uint32_t *array, const uint32_t len) {
+    uint32_t max = 0;
     for (unsigned i = 0; i < len; i++) {
         max = array[i] > max ? array[i] : max;
     }
     return max;
 }
 
-uint num_digits(uint num) {
-    uint digits = 0;
+uint32_t num_digits(uint32_t num) {
+    uint32_t digits = 0;
 
     while (num) {
         digits++;
@@ -23,6 +23,6 @@ uint num_digits(uint num) {
     return digits;
 }
 
-std::string &left_pad(string &s, const char c, const uint to_len) {
+std::string &left_pad(string &s, const char c, const uint32_t to_len) {
     return s.insert(0, to_len - s.size(), c);
 }

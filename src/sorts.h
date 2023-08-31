@@ -1,22 +1,36 @@
 #ifndef C_SORTS_SORTS_H
 #define C_SORTS_SORTS_H
 
-typedef unsigned int uint;
+#include <cstdint>
 
 namespace comparison_sorts {
-    /**
-     * standard bubble sort (in-place)
-     * @param array
-     * @param len
-     */
-    void bubble_sort(uint *array, uint len);
 
     /**
-     * quick sort with pivot finding in three places
-     * @param array
-     * @param len
+     * Bubble sort (improved)
+     * in-place
+     * avg. O(n²)
+     * @param array array to be sorted
+     * @param len length of the array
      */
-    void quick_sort(uint *array, uint len);
+    void bubble_sort(uint32_t *array, uint32_t len);
+
+    /**
+     * Quicksort with pivot chosen as median from start, middle and end of array
+     * in-place
+     * avg. O(n*log(n))
+     * @param array array to be sorted
+     * @param len length of the array
+     */
+    void quick_sort(uint32_t *array, uint32_t len);
+
+    /**
+     * Top-Down Mergesort
+     * extra worker array (n = len)
+     * avg. O(On*log(n))
+     * @param array array to be sorted
+     * @param len length of the array
+     */
+    void merge_sort_td(uint32_t *array, uint32_t len);
 }
 
 
