@@ -12,6 +12,8 @@ using std::to_string;
 #include "utils.h"
 #include "test.h"
 
+
+using comparison_sorts::insertion_sort;
 using comparison_sorts::bubble_sort;
 using comparison_sorts::quick_sort;
 using comparison_sorts::merge_sort_td;
@@ -39,7 +41,7 @@ bool is_sorted(const uint32_t *array, const uint32_t len) {
 
 
 uint32_t rnd_uint32_t() {
-    static uint32_t MAX_RAN_VALUE = 0xFFFFFF;
+    static uint32_t MAX_RAN_VALUE = 0xFF;
     static auto engine = std::mt19937(
             (uint32_t) std::chrono::high_resolution_clock::now().time_since_epoch().count());
     static auto dist = std::uniform_int_distribution<unsigned int>((uint32_t) 0, MAX_RAN_VALUE);
@@ -63,7 +65,7 @@ uint64_t time_function(Func f) {
     return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
-ulong time_sort(const string &name, void sort_function(uint32_t *, const uint32_t), const uint32_t len) {
+uint64_t time_sort(const string &name, void sort_function(uint32_t *, const uint32_t), const uint32_t len) {
     auto sorting_array = new uint32_t[len];
     fill_with_random(sorting_array, len);
 
@@ -78,23 +80,25 @@ ulong time_sort(const string &name, void sort_function(uint32_t *, const uint32_
 }
 
 void measure_sort_perf(const string &name, void sort_function(uint32_t *, uint32_t), const uint32_t len) {
-    cout << name << " took " << to_string(time_sort(name, sort_function, len)) << "ms to sort " << to_string(len)
+    uint64_t duration = time_sort(name, sort_function, len);
+    cout << name << " took " << to_string(duration) << "ms to sort " << to_string(len)
          << " elements."
          << endl;
 }
 
 
 int main() {
-    const uint32_t ARRAY_LEN = 100000;
+    const uint32_t ARRAY_LEN = 100'000;
     cout << "Memory Usage of sorting array: " << formatted_memory_amount(ARRAY_LEN * sizeof(uint32_t)) << endl << endl;
 
     // unittest::run_all_tests();
 
 
-    measure_sort_perf(string("Improved Bubblesort"), bubble_sort, ARRAY_LEN);
+    measure_sort_perf(string("Improved Bubble sort"), bubble_sort, ARRAY_LEN);
+    measure_sort_perf(string("Insertion sort"), insertion_sort, ARRAY_LEN);
     measure_sort_perf(string("Quicksort"), quick_sort, ARRAY_LEN);
-    measure_sort_perf(string("Top-Down Mergesort"), merge_sort_td, ARRAY_LEN);
-    measure_sort_perf(string("Bottom-Up Mergesort"), merge_sort_bu, ARRAY_LEN);
+    measure_sort_perf(string("Top-Down Merge sort"), merge_sort_td, ARRAY_LEN);
+    measure_sort_perf(string("Bottom-Up Merge sort"), merge_sort_bu, ARRAY_LEN);
 
     return 0;
 }

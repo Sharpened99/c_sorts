@@ -7,6 +7,7 @@ namespace comparison_sorts {
 
     /**
      * Bubble sort (improved)
+     * stable
      * in-place
      * avg. O(n²)
      * @param array array to be sorted
@@ -15,7 +16,18 @@ namespace comparison_sorts {
     void bubble_sort(uint32_t *array, uint32_t len);
 
     /**
+     * Insertion sort
+     * stable
+     * in-place
+     * avg. O(n²)
+     * @param array array to be sorted
+     * @param len length of the array
+     */
+    void insertion_sort(uint32_t *array, uint32_t len);
+
+    /**
      * Quicksort with pivot chosen as median from start, middle and end of array
+     * stable
      * in-place
      * avg. O(n*log(n))
      * @param array array to be sorted
@@ -25,6 +37,7 @@ namespace comparison_sorts {
 
     /**
      * Top-Down Mergesort
+     * stable
      * extra worker array (n = len)
      * avg. O(n*log(n))
      * @param array array to be sorted
@@ -34,7 +47,8 @@ namespace comparison_sorts {
 
     /**
      * Bottom-Up Mergesort
-     *
+     * stable
+     * extra worker array (n = len)
      * avg. O(n*log(n))
      * @param array array to be sorted
      * @param len length of the array

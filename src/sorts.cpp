@@ -6,18 +6,34 @@
 namespace comparison_sorts {
     void swap(uint32_t *array, uint32_t first_index, uint32_t second_index);
 
+
     void bubble_sort(uint32_t *array, uint32_t len) {
-        bool swapped;
+        uint32_t highest_swap_index;
         do {
-            swapped = false;
+            highest_swap_index = 0;
             for (uint32_t i = 0; i < len - 1; i++) {
                 if (array[i] > array[i + 1]) {
                     swap(array, i, i + 1);
-                    swapped = true;
+                    highest_swap_index = i;
                 }
             }
-            len--;
-        } while (swapped);
+            len = highest_swap_index + 1;
+        } while (len > 1);
+    }
+
+    void insertion_sort(uint32_t *array, uint32_t len) {
+        uint32_t i = 1;
+        while (i < len) {
+            uint32_t val = array[i];
+            uint32_t j = i - 1;
+            // we use j < len so when 'j' is zero and j-- wraps around to UINT32_MAX the loop ends
+            while (j < len && val < array[j]) {
+                array[j + 1] = array[j];
+                j--;
+            }
+            array[j + 1] = val;
+            i++;
+        }
     }
 
     // partition the array and return pivot index
