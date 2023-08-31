@@ -7,20 +7,21 @@ namespace comparison_sorts {
     void swap(uint32_t *array, uint32_t first_index, uint32_t second_index);
 
     void bubble_sort(uint32_t *array, uint32_t len) {
-        bool swapped = true;
-        for (uint32_t i = 0; swapped && i < len; i++) {
+        bool swapped;
+        do {
             swapped = false;
-            for (uint32_t j = 0; j < len - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
-                    swap(array, j, j + 1);
-                    swapped |= true;
+            for (uint32_t i = 0; i < len - 1; i++) {
+                if (array[i] > array[i + 1]) {
+                    swap(array, i, i + 1);
+                    swapped = true;
                 }
             }
-        }
+            len--;
+        } while (swapped);
     }
 
     // partition the array and return pivot index
-    uint32_t quick_sort_partition(uint32_t *array, uint32_t len, uint32_t pivot) {
+    uint32_t quick_sort_partition(uint32_t *array, const uint32_t len, const uint32_t pivot) {
         uint32_t swap_index = 0;
         // Look up other partitioning methods, maybe there are improvements?
         for (uint32_t i_s = 0; i_s < len; i_s++) {
@@ -35,7 +36,7 @@ namespace comparison_sorts {
         return swap_index;
     }
 
-    void quick_sort(uint32_t *array, uint32_t len) {
+    void quick_sort(uint32_t *array, const uint32_t len) {
         // Return if nothing to do
         if (len < 2) {
             return;
@@ -64,7 +65,7 @@ namespace comparison_sorts {
         quick_sort(array + pivot_index + 1, len - pivot_index - 1);
     }
 
-    void merge_sort_td_merge(uint32_t *array, uint32_t len, uint32_t *worker_array) {
+    void merge_sort_td_merge(uint32_t *array, const uint32_t len, uint32_t *worker_array) {
         uint32_t half = len / 2;
         uint32_t i_left = 0;
         uint32_t i_right = half;
@@ -93,7 +94,7 @@ namespace comparison_sorts {
         }
     }
 
-    void merge_sort_td(uint32_t *array, uint32_t len, uint32_t *worker_array) {
+    void merge_sort_td(uint32_t *array, const uint32_t len, uint32_t *worker_array) {
         // base case
         if (len < 2) {
             return;
@@ -108,8 +109,56 @@ namespace comparison_sorts {
         merge_sort_td_merge(array, len, worker_array);
     }
 
-    void merge_sort_td(uint32_t *array, uint32_t len) {
+    void merge_sort_td(uint32_t *array, const uint32_t len) {
         merge_sort_td(array, len, new uint32_t[len]);
+    }
+
+    void merge_sort_bu_merge(const uint32_t *array, const uint32_t start_index, const uint32_t block_size,
+                             const uint32_t len, uint32_t *worker_array) {
+        uint32_t i_left = start_index;
+        uint32_t left_end = i_left + block_size;
+        uint32_t i_right = start_index + block_size;
+        uint32_t right_end = i_right + block_size;
+        uint32_t i_worker = start_index;
+
+        // first merge
+        while (i_left < left_end && i_right < right_end && i_right < len) {
+            if (array[i_left] < array[i_right]) {
+                worker_array[i_worker] = array[i_left++];
+            } else {
+                worker_array[i_worker] = array[i_right++];
+            }
+            i_worker++;
+        }
+        // leftovers
+        while (i_left < left_end) {
+            worker_array[i_worker++] = array[i_left++];
+        }
+        while (i_right < right_end && i_right < len) {
+            worker_array[i_worker++] = array[i_right++];
+        }
+    }
+
+    void merge_sort_bu(uint32_t *array, const uint32_t len, uint32_t *worker_array) {
+        if (len < 2) {
+            return;
+        }
+        uint32_t block_size = 1;
+
+        while (block_size <= len) {
+            for (uint32_t offset = 0; offset < len; offset += 2 * block_size) {
+                merge_sort_bu_merge(array, offset, block_size, len, worker_array);
+            }
+            // copy to original array
+            for (int i = 0; i < len; i++) {
+                array[i] = worker_array[i];
+            }
+            block_size *= 2;
+        }
+    }
+
+    void merge_sort_bu(uint32_t *array, const uint32_t len) {
+        merge_sort_bu(array, len, new uint32_t[len]);
     }
 
     /**
@@ -118,7 +167,7 @@ namespace comparison_sorts {
      * @param first_index
      * @param second_index
      */
-    void swap(uint32_t *array, uint32_t first_index, uint32_t second_index) {
+    void swap(uint32_t *array, const uint32_t first_index, const uint32_t second_index) {
         uint32_t temp = array[first_index];
         array[first_index] = array[second_index];
         array[second_index] = temp;

@@ -15,7 +15,7 @@ using std::make_pair;
 namespace unittest {
 
     bool test_num_digits() {
-        std::array<pair<uint32_t, uint32_t>, 4> test_cases = {
+        const std::array<pair<uint32_t, uint32_t>, 4> test_cases = {
                 make_pair<uint32_t, uint32_t>(1, 1),
                 make_pair<uint32_t, uint32_t>(23, 2),
                 make_pair<uint32_t, uint32_t>(532, 3),
@@ -28,13 +28,13 @@ namespace unittest {
     }
 
     bool test_max_value() {
-        uint32_t values[9] = {123, 12, 2435, 3485, 2397479, 2384, 65342, UINT32_MAX, 3848};
+        const uint32_t values[9] = {123, 12, 2435, 3485, 2397479, 2384, 65342, UINT32_MAX, 3848};
 
         return max_value(values, 9) == UINT32_MAX;
     }
 
     bool test_left_pad() {
-        std::array<std::string, 4> test_cases = {
+        const std::array<std::string, 4> test_cases = {
                 std::to_string((uint32_t) 13),
                 "hey",
                 std::to_string((uint32_t) 0),

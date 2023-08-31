@@ -26,11 +26,20 @@ namespace comparison_sorts {
     /**
      * Top-Down Mergesort
      * extra worker array (n = len)
-     * avg. O(On*log(n))
+     * avg. O(n*log(n))
      * @param array array to be sorted
      * @param len length of the array
      */
     void merge_sort_td(uint32_t *array, uint32_t len);
+
+    /**
+     * Bottom-Up Mergesort
+     *
+     * avg. O(n*log(n))
+     * @param array array to be sorted
+     * @param len length of the array
+     */
+    void merge_sort_bu(uint32_t *array, uint32_t len);
 }
 
 

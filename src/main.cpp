@@ -15,6 +15,7 @@ using std::to_string;
 using comparison_sorts::bubble_sort;
 using comparison_sorts::quick_sort;
 using comparison_sorts::merge_sort_td;
+using comparison_sorts::merge_sort_bu;
 
 
 [[maybe_unused]] void print_array(const uint32_t *array, const uint32_t len) {
@@ -53,44 +54,47 @@ void fill_with_random(uint32_t *array, const uint32_t len) {
 
 template<typename Func>
 uint64_t time_function(Func f) {
-    auto start = std::chrono::system_clock::now();
+    const auto start = std::chrono::system_clock::now();
 
     f();
 
-    auto end = std::chrono::system_clock::now();
+    const auto end = std::chrono::system_clock::now();
 
     return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
-ulong time_sort(void f(uint32_t *, uint32_t), uint32_t len) {
+ulong time_sort(const string &name, void sort_function(uint32_t *, const uint32_t), const uint32_t len) {
     auto sorting_array = new uint32_t[len];
     fill_with_random(sorting_array, len);
 
-    auto duration = time_function([&]() { f(sorting_array, len); });
+    auto duration = time_function([&]() { sort_function(sorting_array, len); });
 
     // did it sort correctly?
     if (!is_sorted(sorting_array, len)) {
-        cerr << "Sort did not sort. Exiting..." << endl;
-        cerr << "function pointer is " << f << endl;
+        cerr << name << " did not the values in the correct order. Exiting..." << endl;
         exit(EXIT_FAILURE);
     }
     return duration;
 }
 
+void measure_sort_perf(const string &name, void sort_function(uint32_t *, uint32_t), const uint32_t len) {
+    cout << name << " took " << to_string(time_sort(name, sort_function, len)) << "ms to sort " << to_string(len)
+         << " elements."
+         << endl;
+}
+
 
 int main() {
-    const uint32_t ARRAY_LEN = 10000;
+    const uint32_t ARRAY_LEN = 100000;
+    cout << "Memory Usage of sorting array: " << formatted_memory_amount(ARRAY_LEN * sizeof(uint32_t)) << endl << endl;
 
     // unittest::run_all_tests();
 
 
-    cout << "Bubble sort took " << to_string(time_sort(bubble_sort, ARRAY_LEN)) << "ms to sort " << to_string(ARRAY_LEN)
-         << " elements."
-         << endl;
-    cout << "Quicksort took " << to_string(time_sort(quick_sort, ARRAY_LEN)) << "ms to sort " << to_string(ARRAY_LEN)
-         << " elements." << endl;
-    cout << "Mergesort took " << to_string(time_sort(merge_sort_td, ARRAY_LEN)) << "ms to sort " << to_string(ARRAY_LEN)
-         << " elements." << endl;
+    measure_sort_perf(string("Improved Bubblesort"), bubble_sort, ARRAY_LEN);
+    measure_sort_perf(string("Quicksort"), quick_sort, ARRAY_LEN);
+    measure_sort_perf(string("Top-Down Mergesort"), merge_sort_td, ARRAY_LEN);
+    measure_sort_perf(string("Bottom-Up Mergesort"), merge_sort_bu, ARRAY_LEN);
 
     return 0;
 }
