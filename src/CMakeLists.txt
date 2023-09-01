@@ -1,2 +1,3 @@
 add_subdirectory(app)
 add_subdirectory(lib_comp_sorts)
+add_subdirectory(lib_tree_sorts)

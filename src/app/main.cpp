@@ -63,7 +63,7 @@ bool is_sorted(const uint32_t *array, const uint32_t len) {
 }
 
 
-uint32_t rnd_uint32_t(uint32_t max_value) {
+uint32_t rnd_uint32_t(const uint32_t max_value) {
     static auto engine = std::mt19937(
             (uint32_t) std::chrono::high_resolution_clock::now().time_since_epoch().count());
     static auto dist = std::uniform_int_distribution<unsigned int>((uint32_t) 0, max_value);
