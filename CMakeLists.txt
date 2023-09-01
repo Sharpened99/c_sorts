@@ -3,4 +3,10 @@ project(c_sorts)
 
 set(CMAKE_CXX_STANDARD 20)
 
+message(${CMAKE_BUILD_TYPE})
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_definitions(DEBUG_BUILD)
+endif ()
+
 add_subdirectory(src)

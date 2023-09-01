@@ -9,7 +9,7 @@ namespace comparison_sorts {
      * Top-Down Mergesort \n
      * stable \n
      * extra worker array (n = len) \n
-     * avg. O(n*log(n)) \n
+     * avg. O(n*log(n))
      * @param array array to be sorted
      * @param len length of the array
      */
@@ -19,7 +19,7 @@ namespace comparison_sorts {
      * Bottom-Up Mergesort \n
      * stable \n
      * extra worker array (n = len) \n
-     * avg. O(n*log(n)) \n
+     * avg. O(n*log(n))
      * @param array array to be sorted
      * @param len length of the array
      */

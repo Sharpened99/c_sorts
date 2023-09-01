@@ -10,7 +10,7 @@ namespace comparison_sorts {
      * Quicksort with pivot chosen as median from start, middle and end of array \n
      * stable \n
      * in-place \n
-     * avg. O(n*log(n)) \n
+     * avg. O(n*log(n))
      * @param array array to be sorted
      * @param len length of the array
      */
