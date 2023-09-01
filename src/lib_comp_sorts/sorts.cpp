@@ -1,12 +1,12 @@
 #include "sorts.h"
 
 
-#include "utils.h"
+#include "sort_utils.h"
+
+using sort_utils::swap;
+
 
 namespace comparison_sorts {
-    void swap(uint32_t *array, uint32_t first_index, uint32_t second_index);
-
-
     void bubble_sort(uint32_t *array, uint32_t len) {
         uint32_t highest_swap_index;
         do {
@@ -175,17 +175,5 @@ namespace comparison_sorts {
 
     void merge_sort_bu(uint32_t *array, const uint32_t len) {
         merge_sort_bu(array, len, new uint32_t[len]);
-    }
-
-    /**
-     * swaps the values of the given array at the given indices
-     * @param array
-     * @param first_index
-     * @param second_index
-     */
-    void swap(uint32_t *array, const uint32_t first_index, const uint32_t second_index) {
-        uint32_t temp = array[first_index];
-        array[first_index] = array[second_index];
-        array[second_index] = temp;
     }
 }

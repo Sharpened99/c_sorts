@@ -1,1 +1,2 @@
-add_executable(c_sorts main.cpp sorts.cpp test.cpp utils.cpp)
+add_subdirectory(app)
+add_subdirectory(lib_comp_sorts)

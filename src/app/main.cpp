@@ -12,7 +12,6 @@ using std::to_string;
 #include "utils.h"
 #include "test.h"
 
-
 using comparison_sorts::insertion_sort;
 using comparison_sorts::bubble_sort;
 using comparison_sorts::quick_sort;
