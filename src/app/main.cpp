@@ -8,7 +8,9 @@ using std::endl;
 using std::string;
 using std::to_string;
 
-#include "sorts.h"
+#include "comp_sorts.h"
+#include "quick_sorts.h"
+#include "merge_sorts.h"
 #include "utils.h"
 #include "test.h"
 
@@ -87,7 +89,7 @@ void measure_sort_perf(const string &name, void sort_function(uint32_t *, uint32
 
 
 int main() {
-    const uint32_t ARRAY_LEN = 100'000;
+    const uint32_t ARRAY_LEN = 100'0;
     cout << "Memory Usage of sorting array: " << formatted_memory_amount(ARRAY_LEN * sizeof(uint32_t)) << endl << endl;
 
     // unittest::run_all_tests();
