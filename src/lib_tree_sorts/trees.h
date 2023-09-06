@@ -3,7 +3,8 @@
 
 #include <cstdint>
 
-namespace sort_utils {
+namespace sort_utils::tree_func {
+
 struct TreeNode {
     uint32_t val;
     struct TreeNode* lhs = nullptr;
@@ -13,13 +14,9 @@ struct TreeNode {
         val = _val;
     }
 };  // struct TreeNode
-
-namespace tree_func {
-
     TreeNode* tree_insert(TreeNode* root, TreeNode* new_node);
 
     void store_to_array(TreeNode* root, uint32_t* array, uint32_t& next_index);
-}  // namespace tree_func
-}  // namespace sort_utils
+    }  // namespace sort_utils::tree_func
 
 #endif  // C_SORTS_TREES_H

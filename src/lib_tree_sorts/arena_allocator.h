@@ -22,7 +22,7 @@ public:
     explicit LinArenaAllocator(uint32_t array_len);
 
     template<typename T>
-    T* alloc();
+    T* alloc();  // implemented in .inl
 
     LinArenaAllocator operator=(const LinArenaAllocator& other) = delete;
 

@@ -47,7 +47,9 @@ namespace comparison_sorts {
     }
 
     void merge_sort_td(uint32_t *array, const uint32_t len) {
-        merge_sort_td(array, len, new uint32_t[len]);
+        auto worker_array = new uint32_t[len];
+        merge_sort_td(array, len, worker_array);
+        delete[] worker_array;
     }
 
     void merge_sort_bu_merge(const uint32_t *array, const uint32_t start_index, const uint32_t block_size,
@@ -95,6 +97,8 @@ namespace comparison_sorts {
     }
 
     void merge_sort_bu(uint32_t *array, const uint32_t len) {
-        merge_sort_bu(array, len, new uint32_t[len]);
+        auto worker_array = new uint32_t[len];
+        merge_sort_bu(array, len, worker_array);
+        delete[] worker_array;
     }
 }

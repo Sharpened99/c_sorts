@@ -4,9 +4,8 @@
 #include "trees.h"
 
 using sort_utils::allocators::LinArenaAllocator;
-using sort_utils::TreeNode;
-using sort_utils::tree_func::tree_insert;
-using sort_utils::tree_func::store_to_array;
+
+using namespace sort_utils::tree_func;
 
 namespace tree_sorts {
 
