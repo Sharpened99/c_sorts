@@ -14,6 +14,7 @@ struct TreeNode {
         val = _val;
     }
 };  // struct TreeNode
+
     TreeNode* tree_insert(TreeNode* root, TreeNode* new_node);
 
     void store_to_array(TreeNode* root, uint32_t* array, uint32_t& next_index);

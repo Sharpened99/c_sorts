@@ -5,10 +5,12 @@
 
 #include "trees.h"
 
+using sort_utils::tree_func::TreeNode;
+
 namespace sort_utils::allocators {
 
 LinArenaAllocator::LinArenaAllocator(uint32_t array_len)
-    : m_size((array_len) * sizeof(sort_utils::TreeNode)) {
+    : m_size((array_len) * sizeof(TreeNode)) {
     m_region = static_cast<std::byte*>(malloc(m_size));
     if (!m_region) {
         std::cerr << "malloc failed" << std::endl;
