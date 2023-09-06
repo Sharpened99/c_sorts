@@ -22,7 +22,7 @@ namespace comparison_sorts {
         } while (len > 1);
     }
 
-    void selection_sort_min(uint32_t *array, uint32_t len) {
+    void select_sort_min(uint32_t *array, uint32_t len) {
         uint32_t swap_index = 0;
 
         while (swap_index < len) {
@@ -40,7 +40,7 @@ namespace comparison_sorts {
         }
     }
 
-    void selection_sort_minmax(uint32_t *array, uint32_t len) {
+    void select_sort_minmax(uint32_t *array, uint32_t len) {
         for (uint32_t sorted_before = 0, sorted_after = len - 1;
              sorted_before < sorted_after; sorted_before++, sorted_after--) {
             uint32_t min_found_value = array[sorted_before], max_found_value = array[sorted_before];

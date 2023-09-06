@@ -3,9 +3,9 @@ project(c_sorts)
 
 set(CMAKE_CXX_STANDARD 20)
 
-message(${CMAKE_BUILD_TYPE})
+message("Build Type: " ${CMAKE_BUILD_TYPE})
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     add_compile_definitions(DEBUG_BUILD)
 endif ()
 

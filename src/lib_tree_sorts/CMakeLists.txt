@@ -2,8 +2,7 @@ add_library(tree_sorts
         tree_sorts.cpp tree_sorts.h
         heap_sorts.cpp heap_sorts.h
         arena_allocator.cpp arena_allocator.h
-        trees.cpp
-        trees.h
+        trees.cpp trees.h
 )
 
 

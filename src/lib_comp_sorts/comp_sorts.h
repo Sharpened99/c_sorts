@@ -23,7 +23,7 @@ namespace comparison_sorts {
      * @param array array to be sorted
      * @param len length of the array
      */
-    void selection_sort_min(uint32_t *array, uint32_t len);
+    void select_sort_min(uint32_t *array, uint32_t len);
 
     /**
     * Selection Sort (Minimum and maximum side) \n
@@ -33,7 +33,7 @@ namespace comparison_sorts {
     * @param array array to be sorted
     * @param len length of the array
     */
-    void selection_sort_minmax(uint32_t *array, uint32_t len);
+    void select_sort_minmax(uint32_t *array, uint32_t len);
 
     /**
      * Insertion sort \n

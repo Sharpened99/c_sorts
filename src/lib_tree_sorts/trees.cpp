@@ -1,28 +1,34 @@
 #include "trees.h"
 
-namespace sort_utils {
+namespace sort_utils::tree_func {
 
-void TreeNode::insert(TreeNode *node) {
-    if (node->val < val) {
-        if (lhs) {
-            lhs->insert(node);
-            return;
-        }
-        lhs = node;
-    } else if (rhs) {
-        rhs->insert(node);
+TreeNode* tree_insert(TreeNode* root, TreeNode* new_node) {
+    if (!root) {
+        return new_node;
     }
-    rhs = node;
+    if (new_node->val < root->val) {
+        root->lhs = tree_insert(root->lhs, new_node);
+    } else {
+        root->rhs = tree_insert(root->rhs, new_node);
+    }
+
+    return root;
 }
 
-uint32_t TreeNode::print_to_array(uint32_t *array, uint32_t next_index) const {
-    if (lhs) {
-        next_index = lhs->print_to_array(array, next_index);
+void store_to_array(TreeNode* root, uint32_t* array, uint32_t& next_index) {
+    if (!root) {
+        return;
     }
-    array[next_index++] = val;
-    if (rhs) {
-        next_index = rhs->print_to_array(array, next_index);
+
+    if (root->lhs) {
+        store_to_array(root->lhs, array, next_index);
     }
-    return next_index;
+
+    array[next_index++] = root->val;
+
+    if (root->rhs) {
+        store_to_array(root->rhs, array, next_index);
+    }
 }
+
 }  // namespace sort_utils

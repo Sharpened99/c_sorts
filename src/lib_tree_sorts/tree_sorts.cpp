@@ -5,6 +5,8 @@
 
 using sort_utils::allocators::LinArenaAllocator;
 using sort_utils::TreeNode;
+using sort_utils::tree_func::tree_insert;
+using sort_utils::tree_func::store_to_array;
 
 namespace tree_sorts {
 
@@ -13,17 +15,17 @@ void tree_sort(uint32_t *array, uint32_t len) {
         return;
     }
 
-    auto arena_a = LinArenaAllocator(len);
+    auto a    = LinArenaAllocator(len);
 
     auto root = TreeNode(array[0]);
 
     for (uint32_t i = 1; i < len; i++) {
-        auto node = arena_a.alloc<TreeNode>();
+        auto* node = a.alloc<TreeNode>();
         node->val = array[i];
-        root.insert(node);
+        tree_insert(&root, node);
     }
-
-    root.print_to_array(array);
+    uint32_t i = 0;
+    store_to_array(&root, array, i);
 }
 
 }  // namespace tree_sorts

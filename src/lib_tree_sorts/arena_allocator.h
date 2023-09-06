@@ -10,8 +10,8 @@ class LinArenaAllocator {
 private:
 
     std::byte* m_region = nullptr;
-    uint32_t m_size;
     std::byte* m_offset;
+    uint64_t m_size;  // size in bytes
 
 public:
 
@@ -29,5 +29,7 @@ public:
     ~LinArenaAllocator();
 };
 }  // namespace sort_utils::allocators
+
+#include "arena_allocator.inl"
 
 #endif  // C_SORTS_ARENA_ALLOCATOR_H

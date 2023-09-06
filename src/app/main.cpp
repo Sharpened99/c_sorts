@@ -18,26 +18,28 @@ using std::make_pair;
 #include "tree_sorts.h"
 #include "utils.h"
 
+using comparison_sorts::bubble_sort;
+using comparison_sorts::insertion_sort;
+using comparison_sorts::merge_sort_bu;
+using comparison_sorts::merge_sort_td;
+using comparison_sorts::quick_sort;
+using comparison_sorts::select_sort_min;
+using comparison_sorts::select_sort_minmax;
+using tree_sorts::tree_sort;
 
 //-----------------------------------------------------------------------------
 
 uint32_t MAX_RAN_VALUE; // Set depending on build type
 
 std::vector<std::pair<string, void (*)(uint32_t *, const uint32_t)>> sorts_list = {
-                make_pair(string("Improved Bubble sort"),
-                          comparison_sorts::bubble_sort),
-                make_pair(string("Selection Sort Minimum Only"),
-                          comparison_sorts::selection_sort_min),
-                make_pair(string("Selection Sort MinMax"),
-                          comparison_sorts::selection_sort_minmax),
-                make_pair(string("Insertion sort"),
-                          comparison_sorts::insertion_sort),
-                make_pair(string("Quicksort"), comparison_sorts::quick_sort),
-                make_pair(string("Top-Down Merge sort"),
-                          comparison_sorts::merge_sort_td),
-                make_pair(string("Bottom-Up Merge sort"),
-                          comparison_sorts::merge_sort_bu),
-                make_pair(string("Tree Sort"), tree_sorts::tree_sort),
+                make_pair(string("Improved Bubble sort"), bubble_sort),
+                make_pair(string("Selection Sort Min"), select_sort_min),
+                make_pair(string("Selection Sort MinMax"), select_sort_minmax),
+                make_pair(string("Insertion sort"), insertion_sort),
+                make_pair(string("Quicksort"), quick_sort),
+                make_pair(string("Top-Down Merge sort"), merge_sort_td),
+                make_pair(string("Bottom-Up Merge sort"), merge_sort_bu),
+                make_pair(string("Tree Sort"), tree_sort),
 }; // Put all future algorithms in this list
 
 //-----------------------------------------------------------------------------
@@ -88,9 +90,16 @@ uint64_t time_function(Func f) {
     return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
+uint32_t *copy_array(uint32_t *dst, const uint32_t *src, const uint32_t len) {
+    for (uint32_t i = 0; i < len; i++) { dst[i] = src[i]; }
+    return dst;
+}
+
 uint64_t time_sort(const string &name, void sort_function(uint32_t *, const uint32_t), const uint32_t len) {
     auto sorting_array = new uint32_t[len];
     fill_with_random(sorting_array, len);
+    auto array_copy = new uint32_t[len];
+    copy_array(array_copy, sorting_array, len);
 
     auto duration = time_function([&]() { sort_function(sorting_array, len); });
 
@@ -98,7 +107,10 @@ uint64_t time_sort(const string &name, void sort_function(uint32_t *, const uint
     if (!is_sorted(sorting_array, len)) {
         cerr << name << " did not the values in the correct order. Exiting..." << endl;
 #ifdef DEBUG_BUILD
-        cerr << "Array was:" << endl << array_to_string(sorting_array, len) << endl;
+        cerr << "Starting array was:" << endl
+             << array_to_string(array_copy, len) << endl;
+        cerr << "Array ended up as:" << endl
+             << array_to_string(sorting_array, len) << endl;
 #endif
         exit(EXIT_FAILURE);
     }
