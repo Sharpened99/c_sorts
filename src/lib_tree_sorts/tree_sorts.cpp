@@ -17,15 +17,15 @@ void tree_sort(uint32_t *array, uint32_t len) {
 
     auto a    = LinArenaAllocator(len);
 
-    auto root = TreeNode(array[0]);
+    TreeNode* root = nullptr;
 
-    for (uint32_t i = 1; i < len; i++) {
+    for (uint32_t i = 0; i < len; i++) {
         auto* node = a.alloc<TreeNode>();
         node->val = array[i];
-        tree_insert(&root, node);
+        root = tree_insert(root, node);
     }
     uint32_t i = 0;
-    store_to_array(&root, array, i);
+    store_to_array(root, array, i);
 }
 
 }  // namespace tree_sorts
