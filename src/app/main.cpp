@@ -12,31 +12,32 @@ using std::to_string;
 using std::make_pair;
 
 #include "comp_sorts.h"
-#include "quick_sorts.h"
 #include "merge_sorts.h"
-#include "utils.h"
+#include "quick_sorts.h"
 #include "test.h"
+#include "tree_sorts.h"
+#include "utils.h"
 
-using comparison_sorts::bubble_sort;
-using comparison_sorts::selection_sort_min;
-using comparison_sorts::selection_sort_minmax;
-using comparison_sorts::insertion_sort;
-using comparison_sorts::quick_sort;
-using comparison_sorts::merge_sort_td;
-using comparison_sorts::merge_sort_bu;
 
 //-----------------------------------------------------------------------------
 
 uint32_t MAX_RAN_VALUE; // Set depending on build type
 
 std::vector<std::pair<string, void (*)(uint32_t *, const uint32_t)>> sorts_list = {
-        make_pair(string("Improved Bubble sort"), bubble_sort),
-        make_pair(string("Selection Sort Minimum Only"), selection_sort_min),
-        make_pair(string("Selection Sort MinMax"), selection_sort_minmax),
-        make_pair(string("Insertion sort"), insertion_sort),
-        make_pair(string("Quicksort"), quick_sort),
-        make_pair(string("Top-Down Merge sort"), merge_sort_td),
-        make_pair(string("Bottom-Up Merge sort"), merge_sort_bu),
+                make_pair(string("Improved Bubble sort"),
+                          comparison_sorts::bubble_sort),
+                make_pair(string("Selection Sort Minimum Only"),
+                          comparison_sorts::selection_sort_min),
+                make_pair(string("Selection Sort MinMax"),
+                          comparison_sorts::selection_sort_minmax),
+                make_pair(string("Insertion sort"),
+                          comparison_sorts::insertion_sort),
+                make_pair(string("Quicksort"), comparison_sorts::quick_sort),
+                make_pair(string("Top-Down Merge sort"),
+                          comparison_sorts::merge_sort_td),
+                make_pair(string("Bottom-Up Merge sort"),
+                          comparison_sorts::merge_sort_bu),
+                make_pair(string("Tree Sort"), tree_sorts::tree_sort),
 }; // Put all future algorithms in this list
 
 //-----------------------------------------------------------------------------
@@ -50,7 +51,7 @@ std::vector<std::pair<string, void (*)(uint32_t *, const uint32_t)>> sorts_list 
         string num_as_str = to_string(array[i]);
         stream << left_pad(num_as_str, ' ', max_digits) << "; ";
     }
-    return stream.str();
+    return std::move(stream.str());
 }
 
 bool is_sorted(const uint32_t *array, const uint32_t len) {
