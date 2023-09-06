@@ -11,11 +11,7 @@ using sort_utils::tree_func::store_to_array;
 namespace tree_sorts {
 
 void tree_sort(uint32_t *array, uint32_t len) {
-    if (len < 1) {
-        return;
-    }
-
-    auto a    = LinArenaAllocator(len);
+    auto a         = LinArenaAllocator(len);
 
     TreeNode* root = nullptr;
 
