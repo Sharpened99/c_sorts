@@ -14,10 +14,12 @@ using std::make_pair;
 #include "comp_sorts.h"
 #include "merge_sorts.h"
 #include "quick_sorts.h"
+#include "radix_sort.h"
 #include "test.h"
 #include "tree_sorts.h"
 #include "utils.h"
 
+using comparison_sorts::bubble_sort;
 using comparison_sorts::bubble_sort;
 using comparison_sorts::insertion_sort;
 using comparison_sorts::merge_sort_bu;
@@ -25,6 +27,7 @@ using comparison_sorts::merge_sort_td;
 using comparison_sorts::quick_sort;
 using comparison_sorts::select_sort_min;
 using comparison_sorts::select_sort_minmax;
+using distribution_sorts::radix_sort_lsd_16;
 using tree_sorts::tree_sort;
 
 //-----------------------------------------------------------------------------
@@ -40,6 +43,7 @@ std::vector<std::pair<string, void (*)(uint32_t *, const uint32_t)>> sorts_list 
                 make_pair(string("Top-Down Merge sort"), merge_sort_td),
                 make_pair(string("Bottom-Up Merge sort"), merge_sort_bu),
                 make_pair(string("Tree Sort"), tree_sort),
+                make_pair(string("LSD Radix Sort Base 16"), radix_sort_lsd_16),
 }; // Put all future algorithms in this list
 
 //-----------------------------------------------------------------------------
@@ -128,9 +132,8 @@ uint64_t time_sort(const string &name, void sort_function(uint32_t *, const uint
 
 void measure_sort_perf(const string &name, void sort_function(uint32_t *, uint32_t), const uint32_t len) {
     uint64_t duration = time_sort(name, sort_function, len);
-    cout << std::right << std::setw(32) << name << " took " << to_string(duration) << "ms to sort " << to_string(len)
-         << " elements."
-         << endl;
+    cout << std::right << std::setw(25) << name << " took " << std::right
+         << std::setw(6) << to_string(duration) << "ms." << endl;
 }
 
 
@@ -144,7 +147,9 @@ int main() {
 #endif
     unittest::run_all_tests();
 
-    cout << endl << "Memory Usage of sorting array: " << formatted_memory_amount(ARRAY_LEN * sizeof(uint32_t)) << endl
+    cout << endl
+         << "Memory Usage of sorting array (" << ARRAY_LEN << " elements): "
+         << formatted_memory_amount(ARRAY_LEN * sizeof(uint32_t)) << endl
          << endl;
 
 
