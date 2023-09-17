@@ -36,7 +36,7 @@ namespace comparison_sorts {
         if (array[mid_index] < array[0]) {
             swap(array, 0, mid_index);
         }
-        if (array[len] < array[0]) {
+        if (array[len - 1] < array[0]) {
             swap(array, 0, len - 1);
         }
         if (array[mid_index] < array[len - 1]) {
