@@ -11,4 +11,4 @@ uint32_t num_digits(uint64_t num);
 
 std::string &left_pad(std::string &s, char c, uint32_t to_len);
 
-#endif //C_SORTS_UTILS_H
+#endif  // C_SORTS_UTILS_H

@@ -4,13 +4,13 @@
 #include <cstdint>
 
 namespace sort_utils {
-    /**
-     * swaps the values of the given array at the given indices
-     * @param array array to swap values in
-     * @param first_index index of first value
-     * @param second_index index of second value
-     */
-    void swap(uint32_t *array, uint32_t first_index, uint32_t second_index);
-}
+/**
+ * swaps the values of the given array at the given indices
+ * @param array array to swap values in
+ * @param first_index index of first value
+ * @param second_index index of second value
+ */
+void swap(uint32_t *array, uint32_t first_index, uint32_t second_index);
+}  // namespace sort_utils
 
-#endif //C_SORTS_SORT_UTILS_H
+#endif  // C_SORTS_SORT_UTILS_H

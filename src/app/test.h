@@ -2,7 +2,7 @@
 #define C_SORTS_TEST_H
 
 namespace unittest {
-    void run_all_tests();
+void run_all_tests();
 };
 
-#endif //C_SORTS_TEST_H
+#endif  // C_SORTS_TEST_H

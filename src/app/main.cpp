@@ -1,15 +1,15 @@
+#include <chrono>
+#include <iomanip>
 #include <iostream>
 #include <random>
-#include <chrono>
 #include <sstream>
-#include <iomanip>
 
-using std::cout;
 using std::cerr;
+using std::cout;
 using std::endl;
+using std::make_pair;
 using std::string;
 using std::to_string;
-using std::make_pair;
 
 #include "comp_sorts.h"
 #include "merge_sorts.h"
@@ -19,7 +19,6 @@ using std::make_pair;
 #include "tree_sorts.h"
 #include "utils.h"
 
-using comparison_sorts::bubble_sort;
 using comparison_sorts::bubble_sort;
 using comparison_sorts::insertion_sort;
 using comparison_sorts::merge_sort_bu;
@@ -32,9 +31,10 @@ using tree_sorts::tree_sort;
 
 //-----------------------------------------------------------------------------
 
-uint32_t MAX_RAN_VALUE; // Set depending on build type
+uint32_t MAX_RAN_VALUE;  // Set depending on build type
 
-std::vector<std::pair<string, void (*)(uint32_t *, const uint32_t)>> sorts_list = {
+std::vector<std::pair<string, void (*)(uint32_t *, const uint32_t)>>
+        sorts_list = {
                 make_pair(string("Improved Bubble sort"), bubble_sort),
                 make_pair(string("Selection Sort Min"), select_sort_min),
                 make_pair(string("Selection Sort MinMax"), select_sort_minmax),
@@ -44,13 +44,13 @@ std::vector<std::pair<string, void (*)(uint32_t *, const uint32_t)>> sorts_list 
                 make_pair(string("Bottom-Up Merge sort"), merge_sort_bu),
                 make_pair(string("Tree Sort"), tree_sort),
                 make_pair(string("LSD Radix Sort Base 16"), radix_sort_lsd_16),
-}; // Put all future algorithms in this list
+};  // Put all future algorithms in this list
 
 //-----------------------------------------------------------------------------
 
-
-[[maybe_unused]] string array_to_string(const uint32_t *array, const uint32_t len) {
-    auto stream = std::stringstream();
+[[maybe_unused]] string array_to_string(const uint32_t *array,
+                                        const uint32_t len) {
+    auto stream     = std::stringstream();
     auto max_digits = num_digits(max_value(array, len));
 
     for (uint32_t i = 0; i < len; i++) {
@@ -69,11 +69,13 @@ bool is_sorted(const uint32_t *array, const uint32_t len) {
     return true;
 }
 
-
 uint32_t rnd_uint32_t(const uint32_t max_value) {
     static auto engine = std::mt19937(
-            (uint32_t) std::chrono::high_resolution_clock::now().time_since_epoch().count());
-    static auto dist = std::uniform_int_distribution<unsigned int>((uint32_t) 0, max_value);
+            (uint32_t) std::chrono::high_resolution_clock::now()
+                    .time_since_epoch()
+                    .count());
+    static auto dist = std::uniform_int_distribution<unsigned int>((uint32_t) 0,
+                                                                   max_value);
     return dist(engine);
 }
 
@@ -91,7 +93,8 @@ uint64_t time_function(Func f) {
 
     const auto end = std::chrono::system_clock::now();
 
-    return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+            .count();
 }
 
 uint32_t *copy_array(uint32_t *dst, const uint32_t *src, const uint32_t len) {
@@ -99,7 +102,9 @@ uint32_t *copy_array(uint32_t *dst, const uint32_t *src, const uint32_t len) {
     return dst;
 }
 
-uint64_t time_sort(const string &name, void sort_function(uint32_t *, const uint32_t), const uint32_t len) {
+uint64_t time_sort(const string &name,
+                   void sort_function(uint32_t *, const uint32_t),
+                   const uint32_t len) {
     auto sorting_array = new uint32_t[len];
     fill_with_random(sorting_array, len);
 
@@ -112,7 +117,8 @@ uint64_t time_sort(const string &name, void sort_function(uint32_t *, const uint
 
     // did it sort correctly?
     if (!is_sorted(sorting_array, len)) {
-        cerr << name << " did not the values in the correct order. Exiting..." << endl;
+        cerr << name << " did not the values in the correct order. Exiting..."
+             << endl;
 #ifdef DEBUG_BUILD
         cerr << "Starting array was:" << endl
              << array_to_string(array_copy, len) << endl;
@@ -130,19 +136,20 @@ uint64_t time_sort(const string &name, void sort_function(uint32_t *, const uint
     return duration;
 }
 
-void measure_sort_perf(const string &name, void sort_function(uint32_t *, uint32_t), const uint32_t len) {
+void measure_sort_perf(const string &name,
+                       void sort_function(uint32_t *, uint32_t),
+                       const uint32_t len) {
     uint64_t duration = time_sort(name, sort_function, len);
     cout << std::right << std::setw(25) << name << " took " << std::right
          << std::setw(6) << to_string(duration) << "ms." << endl;
 }
 
-
 int main() {
 #ifdef DEBUG_BUILD
-    MAX_RAN_VALUE = 0xFF;
+    MAX_RAN_VALUE            = 0xFF;
     const uint32_t ARRAY_LEN = 10;
 #else
-    MAX_RAN_VALUE = 0xFFFFFF;
+    MAX_RAN_VALUE            = 0xFF'FF'FF;
     const uint32_t ARRAY_LEN = 100'000;
 #endif
     unittest::run_all_tests();
@@ -152,8 +159,7 @@ int main() {
          << formatted_memory_amount(ARRAY_LEN * sizeof(uint32_t)) << endl
          << endl;
 
-
-    for (const auto &algorithm: sorts_list) {
+    for (const auto &algorithm : sorts_list) {
         measure_sort_perf(algorithm.first, algorithm.second, ARRAY_LEN);
     }
 

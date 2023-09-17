@@ -31,4 +31,4 @@ void store_to_array(TreeNode* root, uint32_t* array, uint32_t& next_index) {
     }
 }
 
-}  // namespace sort_utils
+}  // namespace sort_utils::tree_func

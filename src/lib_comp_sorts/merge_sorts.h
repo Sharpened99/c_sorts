@@ -5,25 +5,25 @@
 
 namespace comparison_sorts {
 
-    /**
-     * Top-Down Mergesort \n
-     * stable \n
-     * extra worker array (n = len) \n
-     * avg. O(n*log(n))
-     * @param array array to be sorted
-     * @param len length of the array
-     */
-    void merge_sort_td(uint32_t *array, uint32_t len);
+/**
+ * Top-Down Mergesort \n
+ * stable \n
+ * extra worker array (n = len) \n
+ * avg. O(n*log(n))
+ * @param array array to be sorted
+ * @param len length of the array
+ */
+void merge_sort_td(uint32_t *array, uint32_t len);
 
-    /**
-     * Bottom-Up Mergesort \n
-     * stable \n
-     * extra worker array (n = len) \n
-     * avg. O(n*log(n))
-     * @param array array to be sorted
-     * @param len length of the array
-     */
-    void merge_sort_bu(uint32_t *array, uint32_t len);
-}
+/**
+ * Bottom-Up Mergesort \n
+ * stable \n
+ * extra worker array (n = len) \n
+ * avg. O(n*log(n))
+ * @param array array to be sorted
+ * @param len length of the array
+ */
+void merge_sort_bu(uint32_t *array, uint32_t len);
+}  // namespace comparison_sorts
 
-#endif //C_SORTS_MERGE_SORTS_H
+#endif  // C_SORTS_MERGE_SORTS_H

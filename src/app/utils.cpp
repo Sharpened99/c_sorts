@@ -7,13 +7,9 @@ using std::string;
 using std::to_string;
 
 string formatted_memory_amount(uint64_t bytes) {
-    const static std::array<string, 4> unit_names = {
-            "Byte",
-            "KiloByte",
-            "MegaByte",
-            "GigaByte"
-    };
-    auto prefix_index = 0;
+    const static std::array<string, 4> unit_names = {"Byte", "KiloByte",
+                                                     "MegaByte", "GigaByte"};
+    auto prefix_index                             = 0;
 
     while (bytes >= 1000) {
         prefix_index++;
@@ -23,7 +19,6 @@ string formatted_memory_amount(uint64_t bytes) {
 
     return to_string(bytes) + " " + unit_names[prefix_index];
 }
-
 
 uint32_t max_value(const uint32_t *array, const uint32_t len) {
     uint32_t max = 0;

@@ -5,46 +5,45 @@
 
 namespace comparison_sorts {
 
-    /**
-     * Bubble sort (improved) \n
-     * stable \n
-     * in-place \n
-     * avg. O(n²)
-     * @param array array to be sorted
-     * @param len length of the array
-     */
-    void bubble_sort(uint32_t *array, uint32_t len);
+/**
+ * Bubble sort (improved) \n
+ * stable \n
+ * in-place \n
+ * avg. O(n²)
+ * @param array array to be sorted
+ * @param len length of the array
+ */
+void bubble_sort(uint32_t *array, uint32_t len);
 
-    /**
-     * Selection Sort (Minimum side only) \n
-     * stable \n
-     * in-place \n
-     * avg. O(n²)
-     * @param array array to be sorted
-     * @param len length of the array
-     */
-    void select_sort_min(uint32_t *array, uint32_t len);
+/**
+ * Selection Sort (Minimum side only) \n
+ * stable \n
+ * in-place \n
+ * avg. O(n²)
+ * @param array array to be sorted
+ * @param len length of the array
+ */
+void select_sort_min(uint32_t *array, uint32_t len);
 
-    /**
-    * Selection Sort (Minimum and maximum side) \n
-    * stable \n
-    * in-place \n
-    * avg. O(n²)
-    * @param array array to be sorted
-    * @param len length of the array
-    */
-    void select_sort_minmax(uint32_t *array, uint32_t len);
+/**
+ * Selection Sort (Minimum and maximum side) \n
+ * stable \n
+ * in-place \n
+ * avg. O(n²)
+ * @param array array to be sorted
+ * @param len length of the array
+ */
+void select_sort_minmax(uint32_t *array, uint32_t len);
 
-    /**
-     * Insertion sort \n
-     * stable \n
-     * in-place \n
-     * avg. O(n²)
-     * @param array array to be sorted
-     * @param len length of the array
-     */
-    void insertion_sort(uint32_t *array, uint32_t len);
-}
+/**
+ * Insertion sort \n
+ * stable \n
+ * in-place \n
+ * avg. O(n²)
+ * @param array array to be sorted
+ * @param len length of the array
+ */
+void insertion_sort(uint32_t *array, uint32_t len);
+}  // namespace comparison_sorts
 
-
-#endif //C_SORTS_COMP_SORTS_H
+#endif  // C_SORTS_COMP_SORTS_H
