@@ -11,7 +11,8 @@ namespace sort_utils::allocators {
 
 LinArenaAllocator::LinArenaAllocator(uint32_t array_len)
     : m_size((array_len) * sizeof(TreeNode)) {
-    m_region = static_cast<std::byte*>(malloc(m_size));
+    m_region = static_cast<std::byte*>(calloc(array_len, sizeof(TreeNode)));
+
     if (!m_region) {
         std::cerr << "malloc failed" << std::endl;
         exit(EXIT_FAILURE);
