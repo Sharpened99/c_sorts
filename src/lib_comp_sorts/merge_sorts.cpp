@@ -52,17 +52,21 @@ namespace comparison_sorts {
         delete[] worker_array;
     }
 
-    void merge_sort_bu_merge(const uint32_t *array, const uint32_t start_index, const uint32_t block_size,
+    void merge_sort_bu_merge(const uint32_t *array, const uint32_t start_index, const uint32_t width,
                              const uint32_t len, uint32_t *worker_array) {
         uint32_t i_left = start_index;
-        uint32_t left_end = i_left + block_size;
-        uint32_t i_right = start_index + block_size;
-        uint32_t right_end = i_right + block_size;
+        uint32_t left_end = i_left + width;
+        uint32_t i_right = start_index + width;
+        uint32_t right_end = i_right + width;
         uint32_t i_worker = start_index;
 
+        // clamp to array length
+        left_end = left_end < len ? left_end : len;
+        right_end = right_end < len ? right_end : len;
+
         // first merge
-        while (i_left < left_end && i_right < right_end && i_right < len) {
-            if (array[i_left] < array[i_right]) {
+        while (i_left < left_end && i_right < right_end) {
+            if (array[i_left] <= array[i_right]) {
                 worker_array[i_worker] = array[i_left++];
             } else {
                 worker_array[i_worker] = array[i_right++];
@@ -73,32 +77,27 @@ namespace comparison_sorts {
         while (i_left < left_end) {
             worker_array[i_worker++] = array[i_left++];
         }
-        while (i_right < right_end && i_right < len) {
+        while (i_right < right_end) {
             worker_array[i_worker++] = array[i_right++];
         }
     }
 
-    void merge_sort_bu(uint32_t *array, const uint32_t len, uint32_t *worker_array) {
+    void merge_sort_bu(uint32_t *array, const uint32_t len) {
         if (len < 2) {
             return;
         }
-        uint32_t block_size = 1;
+        auto worker_array = new uint32_t[len];
 
-        while (block_size <= len) {
-            for (uint32_t offset = 0; offset < len; offset += 2 * block_size) {
-                merge_sort_bu_merge(array, offset, block_size, len, worker_array);
+        for (uint32_t width = 1; width < len; width *= 2) {
+            for (uint32_t offset = 0; offset < len; offset += 2 * width) {
+                merge_sort_bu_merge(array, offset, width, len, worker_array);
             }
             // copy to original array
             for (int i = 0; i < len; i++) {
                 array[i] = worker_array[i];
             }
-            block_size *= 2;
         }
-    }
 
-    void merge_sort_bu(uint32_t *array, const uint32_t len) {
-        auto worker_array = new uint32_t[len];
-        merge_sort_bu(array, len, worker_array);
         delete[] worker_array;
     }
 }
