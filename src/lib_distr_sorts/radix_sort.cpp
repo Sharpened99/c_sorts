@@ -5,17 +5,18 @@
 namespace distribution_sorts {
 
 void radix_sort_lsd_16(uint32_t* array, const uint32_t len) {
-    const uint32_t mask         = 0b1111;
+    constexpr uint32_t mask     = 0b1111;
     uint32_t shift_amount       = 0;
     auto* a                     = array;
-    auto* b                     = new uint32_t[len];
+    uint32_t worker_array[len];
+    auto b                          = worker_array;
 
-    const uint32_t counters_len = 16;
-    auto* counters              = new uint32_t[counters_len];
+    constexpr uint32_t counters_len = 16;
+    uint32_t counters[counters_len];
 
     while (shift_amount < sizeof(uint32_t) * 8) {
         // zero out counter array
-        for (uint32_t i = 0; i < counters_len; i++) { counters[i] = 0; }
+        for (unsigned int& counter : counters) { counter = 0; }
 
         // count occurrences of 'digit'
         for (uint32_t i = 0; i < len; i++) {
@@ -46,10 +47,5 @@ void radix_sort_lsd_16(uint32_t* array, const uint32_t len) {
 
         shift_amount += 4;
     }
-
-    // free resources
-    delete[] b;
-    delete[] counters;
 }
-
 }  // namespace distribution_sorts

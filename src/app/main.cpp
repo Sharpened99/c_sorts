@@ -105,11 +105,11 @@ uint32_t *copy_array(uint32_t *dst, const uint32_t *src, const uint32_t len) {
 uint64_t time_sort(const string &name,
                    void sort_function(uint32_t *, const uint32_t),
                    const uint32_t len) {
-    auto sorting_array = new uint32_t[len];
+    uint32_t sorting_array[len];
     fill_with_random(sorting_array, len);
 
 #ifdef DEBUG_BUILD
-    auto array_copy = new uint32_t[len];
+    uint32_t array_copy[len];
     copy_array(array_copy, sorting_array, len);
 #endif
 
@@ -127,11 +127,6 @@ uint64_t time_sort(const string &name,
 #endif
         exit(EXIT_FAILURE);
     }
-
-    delete[] sorting_array;
-#ifdef DEBUG_BUILD
-    delete[] array_copy;
-#endif
 
     return duration;
 }
