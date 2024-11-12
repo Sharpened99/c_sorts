@@ -1,13 +1,11 @@
 #include "radix_sort.h"
 
-#include <cstdlib>
-
 namespace distribution_sorts {
 
 void radix_sort_lsd_16(uint32_t* array, const uint32_t len) {
-    constexpr uint32_t mask     = 0b1111;
-    uint32_t shift_amount       = 0;
-    auto* a                     = array;
+    constexpr uint32_t mask = 0b1111;
+    uint32_t shift_amount   = 0;
+    auto* a                 = array;
     uint32_t worker_array[len];
     auto b                          = worker_array;
 

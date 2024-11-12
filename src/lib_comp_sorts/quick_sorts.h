@@ -1,7 +1,5 @@
 #ifndef C_SORTS_QUICK_SORTS_H
-  #define C_SORTS_QUICK_SORTS_H
-
-#endif  // C_SORTS_QUICK_SORTS_H
+#define C_SORTS_QUICK_SORTS_H
 
 #include <cstdint>
 
@@ -16,3 +14,4 @@ namespace comparison_sorts {
  */
 void quick_sort(uint32_t *array, uint32_t len);
 }  // namespace comparison_sorts
+#endif  // C_SORTS_QUICK_SORTS_H

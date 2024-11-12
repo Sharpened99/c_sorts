@@ -23,7 +23,7 @@ void merge_sort_td_merge(uint32_t *array, const uint32_t len,
     while (i_right < len) { worker_array[i_worker++] = array[i_right++]; }
 
     // copy to original array
-    for (int i = 0; i < len; i++) { array[i] = worker_array[i]; }
+    for (uint32_t i = 0; i < len; i++) { array[i] = worker_array[i]; }
 }
 
 void merge_sort_td(uint32_t *array, const uint32_t len,
@@ -85,7 +85,7 @@ void merge_sort_bu(uint32_t *array, const uint32_t len) {
             merge_sort_bu_merge(array, offset, width, len, worker_array);
         }
         // copy to original array
-        for (int i = 0; i < len; i++) { array[i] = worker_array[i]; }
+        for (uint32_t i = 0; i < len; i++) { array[i] = worker_array[i]; }
     }
 }
 }  // namespace comparison_sorts

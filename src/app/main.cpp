@@ -57,7 +57,7 @@ std::vector<std::pair<string, void (*)(uint32_t *, const uint32_t)>>
         string num_as_str = to_string(array[i]);
         stream << left_pad(num_as_str, ' ', max_digits) << "; ";
     }
-    return std::move(stream.str());
+    return stream.str();
 }
 
 bool is_sorted(const uint32_t *array, const uint32_t len) {

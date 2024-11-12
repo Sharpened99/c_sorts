@@ -2,6 +2,7 @@
 #define C_SORTS_UTILS_H
 
 #include <string>
+#include <cstdint>
 
 std::string formatted_memory_amount(uint64_t bytes);
 
