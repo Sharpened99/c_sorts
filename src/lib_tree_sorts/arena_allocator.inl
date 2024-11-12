@@ -1,3 +1,6 @@
+#ifndef ARENA_ALLOCATOR_INL
+#define ARENA_ALLOCATOR_INL
+
 #include <iostream>
 
 namespace sort_utils::allocators {
@@ -14,3 +17,5 @@ T* LinArenaAllocator::alloc() {
     return static_cast<T*>(ptr);
 }
 }  // namespace sort_utils::allocators
+
+#endif

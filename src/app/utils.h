@@ -1,8 +1,8 @@
 #ifndef C_SORTS_UTILS_H
 #define C_SORTS_UTILS_H
 
-#include <string>
 #include <cstdint>
+#include <string>
 
 std::string formatted_memory_amount(uint64_t bytes);
 
